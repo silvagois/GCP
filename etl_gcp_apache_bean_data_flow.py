@@ -15,7 +15,7 @@ pipeline_options = {
 pipeline_options = PipelineOptions.from_dictionary(pipeline_options)
 p1 = beam.Pipeline(options=pipeline_options)
 
-serviceAccount = "{SERVICE_ACCOUNT_PATH}"
+serviceAccount = f"{SERVICE_ACCOUNT_PATH}"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceAccount
 
 class filtro(beam.DoFn):

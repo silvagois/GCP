@@ -4,7 +4,7 @@ from config_variables import *
 
 p1 = beam.Pipeline()
 
-serviceAccount = "{SERVICE_ACCOUNT_PATH}"
+serviceAccount = f"{SERVICE_ACCOUNT_PATH}"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceAccount
 
 class filtro(beam.DoFn):
