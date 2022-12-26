@@ -1,0 +1,11 @@
+id_consulta, status, duracao
+1,Cancelada, 3
+2,Cancelada, 1
+3,Finalizada, 20
+4,Cancelada, 8
+5,Cancelada, 10
+6,Finalizada,25
+7,Cancelada, 3
+8,Cancelada, 8
+9,Finalizada, 35
+10,Cancelada, 5
