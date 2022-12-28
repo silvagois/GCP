@@ -1,6 +1,22 @@
 import apache_beam as beam
+import pyarrow as pa
 
 p1 = beam.Pipeline()
+
+schema = pa.schema([
+  pa.field(('data'),pa.date64()),
+  pa.field(('voo'),pa.string()),
+  pa.field(('numero'),pa.int64()),
+  pa.field(('sigla_aeroporto_saida'),pa.string()),
+  pa.field(('col6'),pa.string()),
+  pa.field(('col7'),pa.string()),
+  pa.field(('col8'),pa.string()),
+  pa.field(('col9'),pa.string()),
+  pa.field(('col10'),pa.string()),
+  pa.field(('col11'),pa.string()),
+  pa.field(('col12'),pa.string()) 
+])
+
 
 class filtro(beam.DoFn):
   def process(self,record):
@@ -32,10 +48,13 @@ Qtd_Atrasos = (
 tabela_atrasos = (
     {'Qtd_Atrasos':Qtd_Atrasos,'Tempo_Atrasos':Tempo_Atrasos} 
     | "Group By" >> beam.CoGroupByKey()
-    | "Saida GCP Bucket" >> beam.io.WriteToText("gs://raw-etl-gcp/entrada/voos_agrupado.csv")
-    #| beam.Map(print)
+    #| "Saida GCP Bucket" >> beam.io.WriteToText("gs://raw-etl-gcp/entrada/voos_agrupado.csv")
+    #| "Saida GCP Bucket" >> beam.io.WriteToParquet("gs://raw-etl-gcp/entrada/voos_agrupado.parquet", schema=schema,codec='snappy', file_name_suffix='.parquet')
+
+    | beam.Map(print)
 )
 
 p1.run()
+
 
 

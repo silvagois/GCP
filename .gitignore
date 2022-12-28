@@ -1,0 +1,13 @@
+# Diretorios
+__pycache__
+Lib/
+Scripts/
+
+
+# Arquivos .py e json
+teste_json.py
+config_variables.py
+config_variables.json
+
+# Igone todos arquivos .log
+*.log 

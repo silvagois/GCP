@@ -1,9 +1,14 @@
 import apache_beam as beam
+import json
 
 p1 = beam.Pipeline()
 
-PATH = "C:\\Users\\016110631\Documents\\Cloud\\GCP\\"
-ARCHIVE = "voos_sample.csv"
+#PATH = "C:\\Users\\016110631\Documents\\Cloud\\GCP\\"
+#ARCHIVE = "voos_sample.csv"
+
+json_file = open("config_variables.json")
+context = json.load(json_file)
+
 
 class filtro(beam.DoFn):
   def process(self,record):
@@ -12,7 +17,7 @@ class filtro(beam.DoFn):
 
 Tempo_Atrasos = (
   p1
-  | "Importar Dados Atraso" >> beam.io.ReadFromText(f"{PATH}{ARCHIVE}", skip_header_lines = 1) 
+  | "Importar Dados Atraso" >> beam.io.ReadFromText(f"{PATH}{ARCHIVE}", skip_header_lines = 1)  
   | "Separar por Vírgulas Atraso" >> beam.Map(lambda record: record.split(','))
   | "Pegar voos com atraso" >> beam.ParDo(filtro())
   | "Criar par atraso" >> beam.Map(lambda record: (record[4],int(record[8])))
